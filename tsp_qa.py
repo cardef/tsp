@@ -5,7 +5,7 @@ import string
 import urllib
 import tsplib95
 
-
+#Importing the descriptive file of the graph under examination and instantiating it via the networkx library
 url = "https://people.sc.fsu.edu/~jburkardt/datasets/tsp/gr17.tsp"
 file = urllib.request.urlopen(url)
 tsp_graph = file.read().decode('utf-8')
@@ -22,7 +22,7 @@ labels = nx.get_edge_attributes(graph,'weight')
 
 nx.draw_networkx_edge_labels(graph,pos,edge_labels=labels)
 
-
+#Iterations on the nodes and vertices of the graph and assignment to each of them of the corresponding term of the Hamiltonian (for mathematical formulation see: https://arxiv.org/pdf/2110.12158.pdf)
 
 from collections import defaultdict
 from itertools import permutations
@@ -59,7 +59,7 @@ for edge in edges:
         J[(edge[0], j), (edge[1], (j+1)%N)] += weight
         J[(edge[1], j), (edge[0], (j+1)%N)] += weight
 
-
+#Remote initialisation of the dwave solver, given the previously constructed Hamiltonian. 10 measurements are taken.
 
 from dimod import BinaryQuadraticModel
 from dwave.system import EmbeddingComposite, DWaveSampler
@@ -68,6 +68,7 @@ sampler = EmbeddingComposite(DWaveSampler())
 bqm = BinaryQuadraticModel(J, offset = 2*C*N, vartype = 'BINARY')
 sampleset = KerberosSampler().sample(bqm, num_reads = 10)
 
+#The solution is found by taking the most frequent measurement. The optimal path is shown on the graph.
 
 sample = sampleset.first.sample
 
