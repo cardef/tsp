@@ -22,7 +22,7 @@ labels = nx.get_edge_attributes(graph,'weight')
 
 nx.draw_networkx_edge_labels(graph,pos,edge_labels=labels)
 
-#Iterations on the nodes and vertices of the graph and assignment to each of them of the corresponding term of the Hamiltonian (for mathematical formulation see: https://arxiv.org/pdf/2110.12158.pdf)
+#Iterations on the nodes and vertices of the graph and assignment to each of them of the corresponding term of the Hamiltonian (for mathematical formulation see: https://www.frontiersin.org/articles/10.3389/fphy.2014.00005/full)
 
 from collections import defaultdict
 from itertools import permutations
