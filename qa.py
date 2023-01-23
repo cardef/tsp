@@ -29,7 +29,6 @@ from itertools import permutations
 h = defaultdict(float)
 J = defaultdict(float)
 C = graph.size(weight="weight")*graph.number_of_nodes()/graph.number_of_edges()
-#C = 1000000000
 N = len(nodes)
 
 #nodes constraint
